@@ -1,0 +1,164 @@
+import pandas as pd
+import numpy as np
+import math
+from scipy import stats
+
+import os
+base_folder = os.path.dirname(os.path.abspath(__file__))
+raw_folder = os.path.join(base_folder, "..", "data", "raw")
+out_folder = os.path.join(base_folder, "..", "data", "processed")
+
+df = pd.read_csv(os.path.join(raw_folder, "data_center_hybrid.csv"))
+
+
+# ---------------- part 1: data smoothing (binning method) ----------------
+# we will smooth the PUE column using equal width bins and replace each
+# value by the mean of its bin. this removes small noise/fluctuations.
+
+def smooth_by_bin_mean(data, num_bins):
+    data = data.copy().reset_index(drop=True)
+    sorted_data = data.sort_values().reset_index(drop=True)
+    n = len(sorted_data)
+    bin_size = n // num_bins
+
+    smoothed = sorted_data.copy()
+    start = 0
+    for i in range(num_bins):
+        end = start + bin_size
+        if i == num_bins - 1:
+            end = n
+        bin_values = sorted_data[start:end]
+        bin_mean = bin_values.mean()
+        for j in range(start, end):
+            smoothed[j] = bin_mean
+        start = end
+    return smoothed
+
+
+pue_sample = df["PUE"].head(20)
+pue_smoothed = smooth_by_bin_mean(pue_sample, num_bins=4)
+
+print("part 1: data smoothing (binning method) on first 20 PUE values")
+print("original values (sorted):")
+print(sorted(pue_sample.tolist()))
+print("smoothed values (bin means):")
+print(pue_smoothed.tolist())
+print()
+
+
+# ---------------- part 2: data normalization ----------------
+# min max normalization brings values between 0 and 1
+# z score normalization makes mean = 0 and std = 1
+
+def min_max_normalize(col):
+    min_val = col.min()
+    max_val = col.max()
+    return (col - min_val) / (max_val - min_val)
+
+
+def z_score_normalize(col):
+    mean_val = col.mean()
+    std_val = col.std()
+    return (col - mean_val) / std_val
+
+
+df["PUE_minmax"] = min_max_normalize(df["PUE"])
+df["PUE_zscore"] = z_score_normalize(df["PUE"])
+
+print("part 2: data normalization on PUE column")
+print(df[["PUE", "PUE_minmax", "PUE_zscore"]].head(10))
+print()
+
+
+# ---------------- part 3: redundancy analysis ----------------
+# pearson correlation checks if two numeric columns move together
+# chi square checks if two categorical columns are related
+
+pearson_corr, pearson_p = stats.pearsonr(df["Estimated_Capacity_MW"], df["Daily_Electricity_Usage_MWh"])
+
+print("part 3a: pearson correlation between Estimated_Capacity_MW and Daily_Electricity_Usage_MWh")
+print("correlation coefficient:", round(pearson_corr, 4))
+print("p value:", pearson_p)
+if abs(pearson_corr) > 0.9:
+    print("these two attributes are highly correlated, one of them could be considered redundant")
+else:
+    print("these two attributes are not strongly redundant")
+print()
+
+contingency_table = pd.crosstab(df["Facility_Type"], df["Cooling_System_Type"])
+chi2_val, chi2_p, dof, expected = stats.chi2_contingency(contingency_table)
+
+print("part 3b: chi square test between Facility_Type and Cooling_System_Type")
+print("contingency table:")
+print(contingency_table)
+print("chi2 statistic:", round(chi2_val, 4))
+print("p value:", chi2_p)
+print("degrees of freedom:", dof)
+if chi2_p < 0.05:
+    print("p value is less than 0.05, so the two attributes are dependent (related)")
+else:
+    print("p value is more than 0.05, so the two attributes are independent")
+print()
+
+
+# ---------------- part 4: discretization by intuitive partitioning (3-4-5 rule) ----------------
+# this is the textbook 3-4-5 rule used to split a numeric range into
+# nice, easy to read intervals based on the most significant digit
+
+def get_most_significant_digit(value):
+    if value == 0:
+        return 0, 1
+    exponent = math.floor(math.log10(abs(value)))
+    place_value = 10 ** exponent
+    lead_digit = int(value / place_value)
+    return lead_digit, place_value
+
+
+def three_four_five_rule(low, high):
+    data_range = high - low
+    lead_digit, place_value = get_most_significant_digit(data_range)
+
+    if lead_digit in [1, 5, 10] or lead_digit == 0:
+        num_parts = 5
+    elif lead_digit in [2, 4, 8]:
+        num_parts = 4
+    elif lead_digit in [3, 6, 9]:
+        num_parts = 3
+    else:
+        num_parts = 4
+
+    new_low = math.floor(low / place_value) * place_value
+    new_high = math.ceil(high / place_value) * place_value
+    step = (new_high - new_low) / num_parts
+
+    bin_edges = []
+    current = new_low
+    for i in range(num_parts + 1):
+        bin_edges.append(round(current, 2))
+        current = current + step
+
+    return bin_edges
+
+
+capacity_low = df["Estimated_Capacity_MW"].min()
+capacity_high = df["Estimated_Capacity_MW"].max()
+bin_edges = three_four_five_rule(capacity_low, capacity_high)
+
+print("part 4: discretization by intuitive partitioning (3-4-5 rule)")
+print("attribute used: Estimated_Capacity_MW")
+print("min value:", capacity_low, "max value:", capacity_high)
+print("bin edges generated by 3-4-5 rule:", bin_edges)
+
+bin_labels = []
+for i in range(len(bin_edges) - 1):
+    bin_labels.append(str(bin_edges[i]) + " to " + str(bin_edges[i + 1]))
+
+df["Capacity_Bucket"] = pd.cut(df["Estimated_Capacity_MW"], bins=bin_edges, labels=bin_labels, include_lowest=True)
+
+print()
+print("number of facilities in each capacity bucket:")
+print(df["Capacity_Bucket"].value_counts().sort_index())
+
+df.to_csv(os.path.join(out_folder, "data_center_hybrid_preprocessed.csv"), index=False)
+print()
+print("saved preprocessed file as data_center_hybrid_preprocessed.csv")
