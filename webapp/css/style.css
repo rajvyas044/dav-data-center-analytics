@@ -498,12 +498,43 @@ tr:hover td {
    Filter Bars, Controls & Buttons
    ========================================================================== */
 
+.filter-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.kpi-section {
+  margin-bottom: 38px;
+}
+
+.section-header {
+  margin-bottom: 16px;
+}
+
+.section-header h2 {
+  font-family: var(--f-display);
+  font-size: 21px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: var(--ink);
+}
+
+.section-header p {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0;
+}
+
 .bar {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
   align-items: flex-end;
-  margin-bottom: 22px;
+  margin-bottom: 0;
 }
 
 .field {
