@@ -11,7 +11,7 @@ pages.home = function () {
   s += '<div class="home-intro">';
   s += '<div class="crumb"><span class="pill">Project</span><span>Data Analytics & Visualization</span></div>';
   s += '<h1>Data Center Energy and Water Efficiency</h1>';
-  s += '<p class="lead">An end-to-end analysis of facility power consumption, cooling overhead, and regional water stress using real-world operational records from ' + o.years[0] + ' to ' + o.years[1] + '. Explore the analyses below or use the menu to jump directly to any technique.</p>';
+  s += '<p class="lead">An end-to-end analysis of facility power consumption, cooling overhead, and regional water stress using operational records of data-center facilities from ' + o.years[0] + ' to ' + o.years[1] + '. Explore the analyses below or use the menu to jump directly to any technique.</p>';
   s += '</div>';
 
   // 2. Open Stat Strip (Varied layout: no boxes-inside-boxes)
@@ -28,7 +28,7 @@ pages.home = function () {
   s += '<p class="what">Average Power Usage Effectiveness (PUE) compared with average daily electricity consumption per facility over time.</p>';
   s += '<div class="chart tall"><canvas id="home_c"></canvas></div>';
   s += '<div class="meaning-box">';
-  s += '<b>What this means in plain words:</b> Over the four years, energy efficiency steadily improved across the fleet (average PUE dropped from ' + fmt(y1.pue, 3) + ' to ' + fmt(y2.pue, 3) + '). At the same time, total power drawn by the average facility grew by ' + elec_growth + ' (from ' + fmt(y1.elec, 0) + ' to ' + fmt(y2.elec, 0) + ' MWh per day) due to heavier computational workloads.';
+  s += '<b>What this means in plain words:</b> From ' + o.years[0] + ' to ' + o.years[1] + ' (' + (o.years[1] - o.years[0] + 1) + ' years), energy efficiency steadily improved across the fleet (average PUE dropped from ' + fmt(y1.pue, 3) + ' to ' + fmt(y2.pue, 3) + '). At the same time, total power drawn by the average facility grew by ' + elec_growth + ' (from ' + fmt(y1.elec, 0) + ' to ' + fmt(y2.elec, 0) + ' MWh per day) due to heavier computational workloads.';
   s += '</div>';
   s += '</section>';
 

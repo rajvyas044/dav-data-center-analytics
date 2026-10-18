@@ -706,13 +706,58 @@ input[type=range] {
 /* Open Data Metric Strip (No boxes-inside-boxes) */
 .stat-strip {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px 24px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px 20px;
   margin: 18px 0 32px;
   padding: 20px 24px;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 14px;
+}
+
+/* 5-item strip for KPI Dashboard and Statistics (Guaranteed 1 row on desktop, 3+2 on medium) */
+.stat-strip.five-items {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+@media (max-width: 1180px) {
+  .stat-strip.five-items {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .stat-strip.five-items .stat-item:nth-child(1),
+  .stat-strip.five-items .stat-item:nth-child(2),
+  .stat-strip.five-items .stat-item:nth-child(3) {
+    grid-column: span 2;
+  }
+  .stat-strip.five-items .stat-item:nth-child(4),
+  .stat-strip.five-items .stat-item:nth-child(5) {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 640px) {
+  .stat-strip.five-items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .stat-strip.five-items .stat-item:nth-child(1),
+  .stat-strip.five-items .stat-item:nth-child(2),
+  .stat-strip.five-items .stat-item:nth-child(3),
+  .stat-strip.five-items .stat-item:nth-child(4) {
+    grid-column: span 1;
+  }
+  .stat-strip.five-items .stat-item:nth-child(5) {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 440px) {
+  .stat-strip,
+  .stat-strip.five-items {
+    grid-template-columns: 1fr;
+  }
+  .stat-strip.five-items .stat-item:nth-child(5) {
+    grid-column: span 1;
+  }
 }
 
 .stat-item {

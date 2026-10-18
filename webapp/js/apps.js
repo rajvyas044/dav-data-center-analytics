@@ -15,8 +15,8 @@ pages.apps = function () {
   var ent = type_row('Enterprise/Standard');
   var R = D.regression;
 
-  var s = head('Applications', 'Decision Support & Practical Impact', 'Real-World Applications & Viva Defense',
-    'How real-world engineering, financial, and regulatory stakeholders translate each analytical finding in this project into concrete operational decisions.');
+  var s = head('Applications', 'Decision Support & Practical Impact', 'Operational Applications & Viva Defense',
+    'How engineering, sustainability, and regulatory stakeholders translate each analytical finding in this project into concrete operational decisions.');
 
   var items = [
     {

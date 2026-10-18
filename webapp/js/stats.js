@@ -93,7 +93,7 @@ function stat_draw() {
   var t = D.stats[state.stat_attr];
 
   // Open Metric Strip for chosen attribute
-  var cards = '<div class="stat-strip">' +
+  var cards = '<div class="stat-strip five-items">' +
     '<div class="stat-item"><span class="lbl">Arithmetic Mean</span><span class="num">' + fmt(t.mean, 2) + '</span><span class="sub">central balance point</span></div>' +
     '<div class="stat-item"><span class="lbl">Median (Q2)</span><span class="num">' + fmt(t.median, 2) + '</span><span class="sub">50th percentile rank</span></div>' +
     '<div class="stat-item"><span class="lbl">IQR Spread</span><span class="num">' + fmt(t.iqr, 2) + '</span><span class="sub">Q1 ' + fmt(t.q1, 2) + ' to Q3 ' + fmt(t.q3, 2) + '</span></div>' +

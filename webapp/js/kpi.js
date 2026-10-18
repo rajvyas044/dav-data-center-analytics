@@ -82,7 +82,7 @@ function kpi_draw() {
   var out = '';
 
   // 1. Metric Summary Strip (Open layout, no nested box clutter)
-  out += '<div class="stat-strip">';
+  out += '<div class="stat-strip five-items">';
   out += '<div class="stat-item"><span class="lbl">Active Records</span><span class="num">' + fmt(res.n) + '</span><span class="sub">facility-years in view</span></div>';
   out += '<div class="stat-item"><span class="lbl">Average PUE</span><span class="num">' + fmt(res.pue / res.n, 3) + '</span><span class="sub">fleet baseline ' + fmt(fleet_pue, 3) + ' (lower is better)</span></div>';
   out += '<div class="stat-item"><span class="lbl">Average WUE</span><span class="num">' + fmt(res.wue / res.n, 2) + '</span><span class="sub">litres per IT kWh</span></div>';
