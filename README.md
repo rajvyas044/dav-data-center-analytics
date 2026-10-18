@@ -1,6 +1,16 @@
    # Data Center Analytics Studio
 
       Live demo: https://rajvyas044.github.io/dav-data-center-analytics/webapp/index.html
+   
+   ## Screenshots
+   ![](screenshots/home-dark.png)
+
+   ![KPI dashboard](screenshots/kpi-dashboard-dark.png)
+
+   ![Clustering](screenshots/clustering-dark.png)
+   
+   ![Regression](screenshots/regression-dark.png)   
+   
    A web app that shows all analysis of data_center_hybrid.csv
    (126,770 records, 18,110 facilities, 2019 to 2025) in one place:
    KPI dashboard, clustering, regression, KNIME workflow view,
