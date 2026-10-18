@@ -672,6 +672,144 @@ input[type=range] {
   color: var(--ink2);
 }
 
+/* Open Data Metric Strip (No boxes-inside-boxes) */
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px 24px;
+  margin: 18px 0 32px;
+  padding: 20px 24px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.stat-item .lbl {
+  font-size: 11.5px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.stat-item .num {
+  font-family: var(--f-mono);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.stat-item .sub {
+  font-size: 13px;
+  color: var(--ink2);
+}
+
+/* Prominent Hero Meaning Callout */
+.meaning-box {
+  margin-top: 18px;
+  padding: 14px 18px;
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.meaning-box b {
+  color: var(--accent);
+}
+
+/* Structured Analytical Pathways (Tool Tints & Clear Hierarchy) */
+.paths-container {
+  margin-top: 36px;
+}
+
+.paths-container > h3 {
+  margin-bottom: 20px;
+}
+
+.path-group {
+  margin-bottom: 24px;
+}
+
+.path-group-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.path-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+}
+
+.path-card {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px 22px;
+  min-width: 0;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.path-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-hover);
+}
+
+.path-card[data-tool="tableau"]:hover {
+  border-color: var(--tool-tableau);
+}
+
+.path-card[data-tool="knime"]:hover {
+  border-color: var(--tool-knime);
+}
+
+.path-card[data-tool="python"]:hover {
+  border-color: var(--tool-python);
+}
+
+.path-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.path-card .t {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--ink);
+  margin: 10px 0 6px;
+}
+
+.path-card .d {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink2);
+}
+
 /* ==========================================================================
    Specialized Page Elements (KNIME, Heatmaps, Steps, Apps)
    ========================================================================== */
