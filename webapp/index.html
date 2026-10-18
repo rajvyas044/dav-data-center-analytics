@@ -8,12 +8,30 @@
 <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
+<header class="mobile-bar" id="mobile_bar">
+  <button id="menu_toggle" class="menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+    <span class="menu-icon" aria-hidden="true">☰</span>
+  </button>
+  <span class="mobile-brand">Data Center Analytics</span>
+  <button id="theme_toggle_mobile" class="theme-btn-compact" type="button" aria-label="Toggle dark mode">◑</button>
+</header>
 <div class="app">
-  <aside class="side" aria-label="Menu">
-    <p class="brand">Data Center<br>Analytics Studio</p>
-    <p class="brand-sub">data_center_hybrid.csv · every analysis in one place</p>
+  <aside class="side" id="sidebar" aria-label="Menu">
+    <div class="side-header">
+      <div>
+        <p class="brand">Data Center<br>Analytics Studio</p>
+        <p class="brand-sub">data_center_hybrid.csv · every analysis in one place</p>
+      </div>
+      <button id="menu_close" class="menu-close-btn" type="button" aria-label="Close navigation menu">&times;</button>
+    </div>
     <div class="chips" id="tool_chips" role="group" aria-label="Choose a tool"></div>
     <nav class="nav" id="nav"></nav>
+    <div class="side-footer">
+      <button id="theme_toggle" class="theme-toggle-btn" type="button" aria-label="Switch between light and dark theme">
+        <span class="theme-icon" aria-hidden="true">◑</span>
+        <span class="theme-label">Dark mode</span>
+      </button>
+    </div>
   </aside>
   <main class="main" id="main" tabindex="-1"></main>
 </div>
