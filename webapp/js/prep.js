@@ -1,8 +1,8 @@
-/* ---------- PREPROCESSING (Python, P10) ---------- */
+/* ---------- PREPROCESSING (Python) ---------- */
 pages.prep = function () {
   var P = D.prep;
-  var s = head('Practical 10', 'Python · pandas, SciPy', 'Data preprocessing',
-    'Five data-quality steps from the notebook: smoothing by binning, normalisation, two redundancy tests, and discretisation with the 3-4-5 rule.');
+  var s = head('Python', 'pandas, SciPy', 'Data preprocessing',
+    'Five data-quality steps: smoothing by binning, normalisation, two redundancy tests, and discretisation with the 3-4-5 rule.');
   s += '<div class="grid g2">';
   s += panel('1. Smoothing by binning', 'The first 20 PUE values are sorted, split into 4 equal bins of 5, and each value is replaced by its bin mean. Bars are the original values, the line is the smoothed result.',
     '<div class="chart"><canvas id="p_bin"></canvas></div>',

@@ -1,4 +1,4 @@
-/* ---------- CLUSTERING (Tableau, P8) ---------- */
+/* ---------- CLUSTERING (Tableau) ---------- */
 var k3_names = ['Weak on both', 'Water-lean, air cooled', 'Efficient energy, thirsty'];
 var k3_text = [
   'Highest PUE and the highest WUE. Every facility here is evaporative cooled. First target for improvement.',
@@ -18,11 +18,11 @@ function top_mix(obj) {
   return best + ' ' + fmt(bv, 0) + '%';
 }
 pages.cluster = function () {
-  var s = head('Practical 8', 'Tableau · Analytics pane, Cluster', 'Facility clustering',
+  var s = head('Tableau', 'Analytics pane, Cluster', 'Facility clustering',
     'K-means groups the 18,110 facilities by average PUE and average WUE (both normalised, one mark per Facility ID). Lower is better on both axes.');
   s += '<div class="bar"><div class="field">Number of clusters (k)<span class="seg" id="k_seg">';
   for (var k = 2; k <= 5; k++) {
-    s += '<button class="btn" data-k="' + k + '" aria-pressed="' + (state.k === k) + '">k = ' + k + (k === 3 ? ' (practical)' : '') + '</button>';
+    s += '<button class="btn" data-k="' + k + '" aria-pressed="' + (state.k === k) + '">k = ' + k + (k === 3 ? ' (default)' : '') + '</button>';
   }
   s += '</span></div></div><div id="cl_out"></div>';
   return s;
@@ -51,7 +51,7 @@ function cluster_draw() {
     for (i = 0; i < 3; i++) { desc += '<li><b>Cluster ' + (i + 1) + ' (' + k3_names[i] + '):</b> ' + k3_text[i] + '</li>'; }
     desc += '</ul>';
   } else {
-    desc = '<p class="what" style="margin:0">Titles are generated from each cluster\'s centre: water level from WUE, energy level from PUE. Use k = 3 for the worked practical result.</p>';
+    desc = '<p class="what" style="margin:0">Titles are generated from each cluster\'s centre: water level from WUE, energy level from PUE. Use k = 3 for the main result.</p>';
   }
   var out = '<div class="grid g2">' +
     panel('Cluster scatter', 'Each dot is a facility (a random 5,000 of 18,110 are drawn). Hover a dot for its values. Click a legend item to hide a cluster.',

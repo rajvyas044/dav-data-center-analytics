@@ -1,4 +1,4 @@
-/* ---------- REGRESSION (Tableau, P9) ---------- */
+/* ---------- REGRESSION (Tableau) ---------- */
 function reg_alpha() { return state.reg.alpha_exp === 0 ? 0 : Math.pow(10, state.reg.alpha_exp); }
 function reg_ridge() {
   var R = D.regression;
@@ -17,7 +17,7 @@ function reg_value(model, x) {
 var reg_names = {lin: 'Linear', poly: 'Polynomial (degree 2)', pow: 'Power', ridge: 'Ridge'};
 pages.regress = function () {
   var r = state.reg;
-  var s = head('Practical 9', 'Tableau · trend lines, Describe Trend Model', 'Regression of electricity on capacity',
+  var s = head('Tableau', 'trend lines, Describe Trend Model', 'Regression of electricity on capacity',
     'How well does a facility\'s capacity predict its daily electricity use? Three trend-line models were fitted in Tableau on all ' + fmt(D.regression.n) + ' records. Ridge was done in Python.');
   s += '<div class="bar"><div class="field">Models on the chart<span class="seg" id="reg_models">';
   var keys = ['lin', 'poly', 'pow', 'ridge'];
@@ -34,7 +34,7 @@ pages.regress = function () {
   s += '<div style="display:grid;gap:16px;min-width:0" id="reg_side">' +
     panel('Predict electricity for a capacity', 'Type a planned capacity and see what each model predicts.',
       '<label class="field">Capacity (MW)<input type="number" id="reg_cap" min="1" max="600" step="1" value="' + r.cap + '"></label><div id="reg_pred" style="margin-top:12px"></div>', '') +
-    panel('Ridge regression (Python practical)', 'Ridge adds a penalty alpha that shrinks the slope. Drag to see the effect; the numbers are exact.',
+    panel('Ridge regression (Python)', 'Ridge adds a penalty alpha that shrinks the slope. Drag to see the effect; the numbers are exact.',
       '<label class="field" style="width:100%">Alpha (penalty)<input type="range" id="reg_alpha" min="0" max="8" step="0.1" value="' + r.alpha_exp + '"></label><div id="reg_ridge" style="margin-top:10px"></div>',
       '<b>Reading:</b> alpha only matters once it is comparable to the spread of capacity (Sxx = ' + fmt(D.regression.sxx / 1e6, 0) + ' million). Below that, Ridge equals ordinary least squares.') + '</div></div>';
   s += '<div id="reg_tab"></div>';

@@ -1,4 +1,4 @@
-/* ---------- STATISTICS (P3) ---------- */
+/* ---------- STATISTICS ---------- */
 var stat_note = {
   Estimated_Capacity_MW: 'Most facilities are small. A few very large ones stretch the right tail, so the mean (23.1) is far above the median (9.9).',
   PUE: 'Tight and nearly symmetric, between 1.06 and 2.00. Few outliers, so PUE is a reliable measure here.',
@@ -7,7 +7,7 @@ var stat_note = {
   Daily_Water_Usage_Gallons: 'Extremely right-skewed. Evaporative sites use far more water than air-cooled ones.'
 };
 pages.stats = function () {
-  var s = head('Practical 3', 'Python · pandas, NumPy', 'Statistics and outliers',
+  var s = head('Python', 'pandas, NumPy', 'Statistics and outliers',
     'Five-number summary, mode, midrange and two outlier tests for the five measures, plus how they relate to each other.');
   var opts = '';
   for (var i = 0; i < D.stats.length; i++) {

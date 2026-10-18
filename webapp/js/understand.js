@@ -1,8 +1,8 @@
-/* ---------- DATA UNDERSTANDING (P1-P2) ---------- */
+/* ---------- DATA UNDERSTANDING ---------- */
 pages.understand = function () {
   var o = D.overview;
   var u = D.uncertainty;
-  var s = head('Practical 1-2', 'Python · pandas', 'Data understanding',
+  var s = head('Python', 'pandas', 'Data understanding',
     'What the dataset holds, how balanced its classes are, where the data is uncertain, and what has to be cleaned before modelling.');
   s += '<div class="grid gk">' +
     kpi_card('Rows', fmt(o.rows), '18,110 facilities x 7 years') +
@@ -30,7 +30,7 @@ pages.understand = function () {
   s += panel('Where the data is uncertain', 'Counts of rows with each problem. Hover a bar for the share of all records.',
     '<div class="chart"><canvas id="unc_c"></canvas></div>',
     '<b>Takeaway:</b> the numeric core (PUE, WUE, electricity, water) is complete. The location columns are the weak part.');
-  s += panel('Cleaning plan', 'Steps applied in the Python practical. Outliers are flagged, not deleted, because large facilities are real.',
+  s += panel('Cleaning plan', 'Steps applied in the Python analysis. Outliers are flagged, not deleted, because large facilities are real.',
     '<ol class="steps"><li>Audit nulls and duplicates. Result: 0 nulls, 0 duplicates.</li>' +
     '<li>Replace placeholder text ("Unknown", "N/A", empty) with real missing values.</li>' +
     '<li>Flag City and Country entries that contain digits (postal codes, address fragments) and blank them.</li>' +

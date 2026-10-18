@@ -7,14 +7,14 @@ var state = {
 };
 var menu = [
   {id: 'home', label: 'Home', tool: 'all', tag: '', group: 'Start'},
-  {id: 'kpi', label: 'KPI dashboard', tool: 'tableau', tag: 'P5', group: 'Tableau'},
-  {id: 'cluster', label: 'Clustering', tool: 'tableau', tag: 'P8', group: 'Tableau'},
-  {id: 'regress', label: 'Regression', tool: 'tableau', tag: 'P9', group: 'Tableau'},
-  {id: 'knime', label: 'KNIME workflow', tool: 'knime', tag: 'nodes', group: 'KNIME'},
-  {id: 'understand', label: 'Data understanding', tool: 'python', tag: 'P1-P2', group: 'Python'},
-  {id: 'stats', label: 'Statistics and outliers', tool: 'python', tag: 'P3', group: 'Python'},
-  {id: 'prep', label: 'Preprocessing', tool: 'python', tag: 'P10', group: 'Python'},
-  {id: 'apps', label: 'Applications and usefulness', tool: 'all', tag: 'use', group: 'Why it matters'}
+  {id: 'kpi', label: 'KPI dashboard', tool: 'tableau', tag: '', group: 'Tableau'},
+  {id: 'cluster', label: 'Clustering', tool: 'tableau', tag: '', group: 'Tableau'},
+  {id: 'regress', label: 'Regression', tool: 'tableau', tag: '', group: 'Tableau'},
+  {id: 'knime', label: 'KNIME workflow', tool: 'knime', tag: '', group: 'KNIME'},
+  {id: 'understand', label: 'Data understanding', tool: 'python', tag: '', group: 'Python'},
+  {id: 'stats', label: 'Statistics and outliers', tool: 'python', tag: '', group: 'Python'},
+  {id: 'prep', label: 'Preprocessing', tool: 'python', tag: '', group: 'Python'},
+  {id: 'apps', label: 'Applications and usefulness', tool: 'all', tag: '', group: 'Why it matters'}
 ];
 var tool_list = [
   {id: 'all', label: 'All', color: ''},

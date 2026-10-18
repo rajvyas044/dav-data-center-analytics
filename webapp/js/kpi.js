@@ -1,4 +1,4 @@
-/* ---------- KPI DASHBOARD (Tableau, P5) ---------- */
+/* ---------- KPI DASHBOARD (Tableau) ---------- */
 function kpi_calc() {
   var cube = D.cube;
   var f = state.kpi;
@@ -37,7 +37,7 @@ function opt_html(list, value, with_index) {
 pages.kpi = function () {
   var d = D.cube.dims;
   var f = state.kpi;
-  var s = head('Practical 5', 'Tableau · interactive dashboard', 'Sustainability KPI dashboard',
+  var s = head('Tableau', 'interactive dashboard', 'Sustainability KPI dashboard',
     'Four linked views of energy and water performance. Use the filters like Tableau quick filters; every chart updates together.');
   s += '<div class="bar">' +
     '<label class="field">Year<select id="f_year">' + opt_html(d.year, f.year, false) + '</select></label>' +

@@ -53,7 +53,7 @@ pages.apps = function () {
   ];
   var tb = '';
   for (var t = 0; t < trows.length; t++) { tb += '<tr><td><b>' + trows[t][0] + '</b></td><td>' + trows[t][1] + '</td><td>' + trows[t][2] + '</td></tr>'; }
-  s += panel('Why each technique earns its place', 'One line per practical.', '<div class="tw"><table><thead><tr><th>Technique</th><th>Question it answers</th><th>What it is used for</th></tr></thead><tbody>' + tb + '</tbody></table></div>', '');
+  s += panel('Why each technique earns its place', 'One line per analysis.', '<div class="tw"><table><thead><tr><th>Technique</th><th>Question it answers</th><th>What it is used for</th></tr></thead><tbody>' + tb + '</tbody></table></div>', '');
   s += '<div style="margin-top:16px">' + panel('Limits to keep in mind', 'Where the results should be used with care.',
     '<ul class="steps"><li><b>Location data is weak.</b> ' + pct(D.uncertainty.city_unknown, D.overview.rows, 0) + ' of rows have an unknown city, so country and city comparisons cover only part of the fleet.</li>' +
     '<li><b>Correlation is not cause.</b> Bigger sites use more power and run at lower PUE, but this data does not show that size alone makes them efficient.</li>' +

@@ -94,7 +94,7 @@ function knime_svg() {
   var ink = get_css('--ink');
   var line = get_css('--line');
   var s = '<svg viewBox="0 0 900 470" width="100%" style="min-width:760px" role="img" aria-label="KNIME-style workflow">';
-  var rows = [['A · Clustering (Practical 8)', 28], ['B · Regression (Practical 9)', 148], ['C · Preprocessing (Practical 10)', 358]];
+  var rows = [['A · Clustering', 28], ['B · Regression', 148], ['C · Preprocessing', 358]];
   for (var r = 0; r < rows.length; r++) {
     s += '<text x="20" y="' + rows[r][1] + '" font-size="12" fill="' + get_css('--muted') + '" letter-spacing="1">' + rows[r][0].toUpperCase() + '</text>';
   }

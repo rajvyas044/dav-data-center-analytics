@@ -5,7 +5,7 @@ pages.home = function () {
   var y2 = year_row(o.years[1]);
   var s = '<div class="hero"><div><div class="crumb"><span class="pill">Project</span><span>Data analytics and visualization</span></div>' +
     '<h1>Data center energy and water, from first look to decisions</h1>' +
-    '<p class="lead">One dataset, every practical. Pick a tool in the menu, then hover over any chart for the exact numbers. Each panel says what it shows and what to conclude from it.</p></div>' +
+    '<p class="lead">One dataset, every analysis. Pick a tool in the menu, then hover over any chart for the exact numbers. Each panel says what it shows and what to conclude from it.</p></div>' +
     '<div class="facts">' +
     kpi_card('Records', fmt(o.rows), 'facility-year rows') +
     kpi_card('Facilities', fmt(o.facilities), o.years[0] + ' to ' + o.years[1] + ', one row per year') +
@@ -31,7 +31,6 @@ pages.home = function () {
   s += '<section class="panel" style="margin-top:16px"><h2>Fleet at a glance</h2><p class="what">Average PUE (energy overhead, lower is better) and average daily electricity per facility, by year.</p>' +
     '<div class="chart"><canvas id="home_c"></canvas></div>' +
     '<div class="insight"><b>Read it as:</b> efficiency improved every year (PUE ' + fmt(y1.pue, 3) + ' to ' + fmt(y2.pue, 3) + ') while the average facility drew ' + pct(y2.elec - y1.elec, y1.elec, 0) + ' more electricity (' + fmt(y1.elec, 0) + ' to ' + fmt(y2.elec, 0) + ' MWh per day).</div></section>';
-  s += '<p class="note" style="margin-top:14px">Practical 4 was the Tableau installation, so it has no page of its own.</p>';
   return s;
 };
 after.home = function () {
