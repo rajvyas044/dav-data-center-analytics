@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Data Center Analytics Studio</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="css/style.css?v=2">
+<link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
 <header class="mobile-bar" id="mobile_bar">
@@ -13,8 +13,8 @@
     <span class="menu-icon" aria-hidden="true">☰</span>
   </button>
   <span class="mobile-brand">Data Center Analytics</span>
-  <button id="theme_toggle_mobile" class="theme-btn-compact" type="button" aria-label="Toggle dark mode">◑</button>
 </header>
+<div id="drawer_backdrop" class="drawer-backdrop" aria-hidden="true"></div>
 <div class="app">
   <aside class="side" id="sidebar" aria-label="Menu">
     <div class="side-header">
@@ -26,12 +26,6 @@
     </div>
     <div class="chips" id="tool_chips" role="group" aria-label="Choose a tool"></div>
     <nav class="nav" id="nav"></nav>
-    <div class="side-footer">
-      <button id="theme_toggle" class="theme-toggle-btn" type="button" aria-label="Switch between light and dark theme">
-        <span class="theme-icon" aria-hidden="true">◑</span>
-        <span class="theme-label">Dark mode</span>
-      </button>
-    </div>
   </aside>
   <main class="main" id="main" tabindex="-1"></main>
 </div>

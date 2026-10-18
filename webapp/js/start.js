@@ -7,100 +7,52 @@ function pick_tool(tl) {
   }
 }
 
-/* ---------- light/dark theme management ---------- */
-function update_theme_ui(theme) {
-  var toggle_btn = el('theme_toggle');
-  if (toggle_btn) {
-    var label = toggle_btn.querySelector('.theme-label');
-    var icon = toggle_btn.querySelector('.theme-icon');
-    if (theme === 'dark') {
-      if (label) { label.textContent = 'Light mode'; }
-      if (icon) { icon.textContent = '☼'; }
-    } else {
-      if (label) { label.textContent = 'Dark mode'; }
-      if (icon) { icon.textContent = '◑'; }
-    }
-  }
-  var mobile_btn = el('theme_toggle_mobile');
-  if (mobile_btn) {
-    mobile_btn.textContent = (theme === 'dark') ? '☼' : '◑';
-  }
-}
-
-function init_theme() {
-  var saved_theme = null;
-  try {
-    saved_theme = localStorage.getItem('dc_theme');
-  } catch (err) { }
-
-  if (saved_theme) {
-    document.documentElement.setAttribute('data-theme', saved_theme);
-    update_theme_ui(saved_theme);
-  }
-
-  function handle_theme_toggle() {
-    var cur = document.documentElement.getAttribute('data-theme');
-    var is_dark = false;
-    if (cur === 'dark') {
-      is_dark = true;
-    } else if (!cur && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      is_dark = true;
-    }
-    var next = is_dark ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    try {
-      localStorage.setItem('dc_theme', next);
-    } catch (err) { }
-    update_theme_ui(next);
-  }
-
-  var toggle_btn = el('theme_toggle');
-  if (toggle_btn) {
-    toggle_btn.addEventListener('click', handle_theme_toggle);
-  }
-  var mobile_btn = el('theme_toggle_mobile');
-  if (mobile_btn) {
-    mobile_btn.addEventListener('click', handle_theme_toggle);
-  }
-}
-
-/* ---------- mobile collapsible sidebar ---------- */
+/* ---------- mobile collapsible sidebar with scroll trap ---------- */
 function init_mobile_sidebar() {
   var menu_toggle = el('menu_toggle');
   var menu_close = el('menu_close');
   var side = el('sidebar');
+  var backdrop = el('drawer_backdrop');
 
-  if (menu_toggle && side) {
+  function open_menu() {
+    if (side) { side.classList.add('open'); }
+    if (menu_toggle) { menu_toggle.setAttribute('aria-expanded', 'true'); }
+    if (backdrop) { backdrop.classList.add('show'); }
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close_menu() {
+    if (side) { side.classList.remove('open'); }
+    if (menu_toggle) { menu_toggle.setAttribute('aria-expanded', 'false'); }
+    if (backdrop) { backdrop.classList.remove('show'); }
+    document.body.style.overflow = '';
+  }
+
+  if (menu_toggle) {
     menu_toggle.addEventListener('click', function () {
-      var is_open = side.classList.contains('open');
+      var is_open = side && side.classList.contains('open');
       if (is_open) {
-        side.classList.remove('open');
-        menu_toggle.setAttribute('aria-expanded', 'false');
+        close_menu();
       } else {
-        side.classList.add('open');
-        menu_toggle.setAttribute('aria-expanded', 'true');
+        open_menu();
       }
     });
   }
 
-  if (menu_close && side) {
-    menu_close.addEventListener('click', function () {
-      side.classList.remove('open');
-      if (menu_toggle) {
-        menu_toggle.setAttribute('aria-expanded', 'false');
-      }
-    });
+  if (menu_close) {
+    menu_close.addEventListener('click', close_menu);
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', close_menu);
   }
 
   // Close sidebar on small screens when a navigation button is clicked
   var nav = el('nav');
-  if (nav && side) {
+  if (nav) {
     nav.addEventListener('click', function () {
       if (window.innerWidth <= 960) {
-        side.classList.remove('open');
-        if (menu_toggle) {
-          menu_toggle.setAttribute('aria-expanded', 'false');
-        }
+        close_menu();
       }
     });
   }
@@ -122,12 +74,7 @@ function start() {
     }
     tip_move(e);
   });
-  try {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { render_page(); });
-    new MutationObserver(function () { render_page(); }).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
-  } catch (err) { }
-  
-  init_theme();
+
   init_mobile_sidebar();
 
   var h = (location.hash || '').replace('#', '');
