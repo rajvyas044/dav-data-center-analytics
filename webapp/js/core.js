@@ -72,6 +72,15 @@ function panel(title, what, inner, insight) {
   if (insight) { s += '<div class="insight">' + insight + '</div>'; }
   return s + '</section>';
 }
+function details_box(summary_text, content_html) {
+  return '<details class="detail-box">' +
+    '<summary class="detail-summary">' +
+    '<span>' + summary_text + '</span>' +
+    '<span class="detail-chevron" aria-hidden="true">▾</span>' +
+    '</summary>' +
+    '<div class="detail-body">' + content_html + '</div>' +
+    '</details>';
+}
 function head(tag, tool, title, aim) {
   return '<div class="crumb"><span class="pill">' + tag + '</span><span>' + tool + '</span></div><h1>' + title + '</h1><p class="lead">' + aim + '</p>';
 }
